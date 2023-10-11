@@ -48,3 +48,25 @@ func (t *Todos) Display() {
 
 }
 
+
+func (t *Todos) DeleteTask(index int) error {
+
+
+	if index>len(*t) {
+		return errors.New("Invalid Index")
+	}
+
+	tl:=*t
+
+	tl=append(tl[:index],tl[index+1:])
+
+	*t=tl
+
+	return nil
+} 
+
+
+
+
+
+
