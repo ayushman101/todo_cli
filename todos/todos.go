@@ -43,7 +43,7 @@ func (t *Todos) Display() {
 
 	fmt.Println("S.No.\t\tName\t\tCompleted\t\tCreatedAt")
 	for i,task:= range *t {
-		fmt.Printf("%v\t\t%s\t\t%v\t\t%s",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822))
+		fmt.Printf("%v\t\t%s\t\t%v\t\t%s\n",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822))
 	}
 
 }
@@ -58,7 +58,7 @@ func (t *Todos) DeleteTask(index int) error {
 
 	tl:=*t
 
-	tl=append(tl[:index],tl[index+1:])
+	tl=append(tl[:index],tl[index+1:]...)
 
 	*t=tl
 

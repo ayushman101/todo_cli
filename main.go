@@ -15,11 +15,25 @@ func main(){
 		os.Exit(1)
 	}
 		
-	fmt.Println(t)
 	
 	tl:=todos.Todos{}
 
 	tl.AddTask(t)
-	
+	t,err= todos.NewTask("Second Task added")
+
+	tl.AddTask(t)
+
+
 	tl.Display()
+
+	err=tl.DeleteTask(1)
+
+	if err!=nil {
+
+		fmt.Printf("Error: %w",err)
+		os.Exit(1)
+	}
+
+	tl.Display()
+
 }
