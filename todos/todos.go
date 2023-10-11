@@ -3,6 +3,7 @@ package todos
 import (
 	"time"
 	"errors"
+	"fmt"
 )
 
 
@@ -37,4 +38,13 @@ func (t *Todos) AddTask(task Task) {
 	*t=tl
 }
 
+
+func (t *Todos) Display() {
+
+	fmt.Println("S.No.\t\tName\t\tCompleted\t\tCreatedAt")
+	for i,task:= range *t {
+		fmt.Printf("%v\t\t%s\t\t%v\t\t%s",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822))
+	}
+
+}
 

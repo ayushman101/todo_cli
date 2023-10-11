@@ -16,5 +16,10 @@ func main(){
 	}
 		
 	fmt.Println(t)
+	
+	tl:=todos.Todos{}
 
+	tl.AddTask(t)
+	
+	tl.Display()
 }
