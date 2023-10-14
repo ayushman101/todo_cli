@@ -24,7 +24,7 @@ func NewTask (name string) (Task,error) {
 		Name: name,
 		Completed: false,
 		CreatedAt: time.Now(),
-		CompletedAt: time.Now(),
+		CompletedAt: time.Time{},
 	},nil
 }
 
@@ -52,7 +52,7 @@ func (t *Todos) Display() {
 func (t *Todos) DeleteTask(index int) error {
 
 
-	if index>len(*t) {
+	if index<1 || index>len(*t) {
 		return errors.New("Invalid Index")
 	}
 
@@ -66,7 +66,16 @@ func (t *Todos) DeleteTask(index int) error {
 } 
 
 
+func (t *Todos) ToggleComplete(index int) error {
+
+	if index<1 || index>len(*t) {
+		return errors.New("Invalid Index")
+	}
 
 
+	t[index-1].Completed=true
 
+	t[index-1].CompletedAt=time.Now()
 
+	return nil
+}
