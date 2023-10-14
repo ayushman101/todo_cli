@@ -38,4 +38,16 @@ func main(){
 
 	tl.SaveToFile("file.json")
 
+	t2,err:=todos.ReadFromFile("file.json")
+
+	if err!=nil{
+		fmt.Println(err)
+	}
+
+	_=t2;
+
+	t2=&tl
+
+	fmt.Println(t2)
+
 }
