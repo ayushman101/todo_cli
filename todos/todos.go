@@ -4,6 +4,8 @@ import (
 	"time"
 	"errors"
 	"fmt"
+	"encoding/json"
+	"os"
 )
 
 
@@ -72,10 +74,44 @@ func (t *Todos) ToggleComplete(index int) error {
 		return errors.New("Invalid Index")
 	}
 
+	tl:=*t
 
-	t[index-1].Completed=true
+	tl[index-1].Completed=true
 
-	t[index-1].CompletedAt=time.Now()
+	tl[index-1].CompletedAt=time.Now()
+
+	*t=tl
 
 	return nil
 }
+
+func (t *Todos) SaveToFile(filename string) error {
+
+	tl:=*t
+
+	jsonData,err:= json.Marshal(tl)
+
+	if err!=nil {
+		
+		return errors.New("Failed to Parse slice to Json")
+
+	}
+	
+	//creating the file for writing json
+	file,err:= os.Create(filename) 
+
+	if err!=nil {
+		
+		return errors.New("Failed to open the file")
+	}
+
+	_,err= file.WriteString(string(jsonData))
+
+	if err!=nil {
+		return errors.New("Failed to write to json file")
+	}
+	
+	return nil
+}
+
+

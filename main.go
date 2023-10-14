@@ -36,4 +36,6 @@ func main(){
 
 	tl.Display()
 
+	tl.SaveToFile("file.json")
+
 }
