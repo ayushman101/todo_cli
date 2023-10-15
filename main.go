@@ -2,52 +2,17 @@ package main
 
 import (
 	"fmt"
-	"github.com/ayushman101/todo_cli/todos"
-	"os"
+//	"github.com/ayushman101/todo_cli/todos"
+//	"os"
+	"flag"
 )
 
 func main(){
-
-	t,err:= todos.NewTask("First Sample Task")
-
-	if err!=nil {
-		fmt.Printf("Error: %w",err)
-		os.Exit(1)
-	}
-		
 	
-	tl:=todos.Todos{}
+	var addVal string
+	flag.StringVar(&addVal,"add","Sample Task", "Use this flag followed by name of the task under quotation marks")
 
-	tl.AddTask(t)
-	t,err= todos.NewTask("Second Task added")
+	flag.Parse();
 
-	tl.AddTask(t)
-
-
-	tl.Display()
-
-	err=tl.DeleteTask(1)
-
-	if err!=nil {
-
-		fmt.Printf("Error: %w",err)
-		os.Exit(1)
-	}
-
-	tl.Display()
-
-	tl.SaveToFile("file.json")
-
-	t2,err:=todos.ReadFromFile("file.json")
-
-	if err!=nil{
-		fmt.Println(err)
-	}
-
-	_=t2;
-
-	t2=&tl
-
-	fmt.Println(t2)
-
+	fmt.Printf("%s\n",addVal)
 }
