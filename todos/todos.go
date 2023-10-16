@@ -6,7 +6,20 @@ import (
 	"fmt"
 	"encoding/json"
 	"os"
+	"github.com/alexeyco/simpletable"
 )
+
+//ANSI Escape Codes for changing the colors
+const (
+	ColorDefault = "\x1b[39m"
+
+	ColorRed   = "\x1b[91m"
+	ColorGreen = "\x1b[32m"
+	ColorBlue  = "\x1b[94m"
+	ColorGray  = "\x1b[90m"
+)
+
+
 
 
 type Task struct{
@@ -43,11 +56,48 @@ func (t *Todos) AddTask(task Task) {
 
 func (t *Todos) Display() {
 
-	fmt.Println("S.No.\t\tName\t\t\tCompleted\t\tCreatedAt\t\tCompletedAt")
-	for i,task:= range *t {
-		fmt.Printf("%v\t\t%s\t\t%v\t\t%s\t\t%s\n",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822), task.CompletedAt.Format(time.RFC822))
+//	fmt.Println("S.No.\t\tName\t\t\tCompleted\t\tCreatedAt\t\tCompletedAt")
+//	for i,task:= range *t {
+//		fmt.Printf("%v\t\t%s\t\t%v\t\t%s\t\t%s\n",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822), task.CompletedAt.Format(time.RFC822))
+	//}
+
+
+
+	table:=simpletable.New()
+
+	table.Header = &simpletable.Header{
+
+		Cells: []*simpletable.Cell{
+			{Align: simpletable.AlignCenter, Text: "#"},
+			{Align: simpletable.AlignCenter, Text: "Task"},
+			{Align: simpletable.AlignCenter, Text: "Completed"},
+			{Align: simpletable.AlignCenter, Text: "CreatedAt"},
+			{Align: simpletable.AlignCenter, Text: "CompletedAt"},
+		},
 	}
 
+	for i, row := range *t {
+		
+		color:=ColorRed
+		if row.Completed{
+			color=ColorGreen
+		}
+
+		r:=[]*simpletable.Cell{
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d",i)},
+			{Align: simpletable.AlignCenter, Text: fmt.Sprintf("%s%v%s", color, row.Name, ColorDefault)},
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%v%s",color,row.Completed,ColorDefault)},
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%s%s",color,row.CreatedAt.Format(time.RFC822),ColorDefault)},
+
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%s%s",color,row.CompletedAt.Format(time.RFC822),ColorDefault)},
+
+		}
+
+		table.Body.Cells= append(table.Body.Cells, r)
+	}
+
+	table.SetStyle(simpletable.StyleRounded)
+	fmt.Println(table.String())
 }
 
 
