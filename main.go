@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-//	"github.com/ayushman101/todo_cli/todos"
-//	"os"
+	"github.com/ayushman101/todo_cli/todos"
+	"os"
 	"flag"
 )
 
@@ -25,9 +25,39 @@ func main(){
 
 	flag.Parse();
 
-	fmt.Printf("%s\n",addVal)
-
 	fmt.Printf("%d\n%d\n",*delInd,*completeIndex)
 
-	fmt.Printf("%v\n",*list)
+	tl,err:=todos.ReadFromFile("file.json")
+
+	if err!=nil{
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+
+
+	switch{
+		
+		case *list:
+			tl.Display()
+
+		case addVal!="" :
+			t,err:=todos.NewTask(addVal)
+			if err!=nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+
+			tl.AddTask(t)
+			err=tl.SaveToFile("file.json")
+			
+			if err!=nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+
+			fmt.Println(addVal," task added ")
+		default : 
+			tl.Display()
+	}
 }

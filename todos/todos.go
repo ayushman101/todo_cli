@@ -129,7 +129,6 @@ func ReadFromFile(filename string) (*Todos, error) {
 	if err!=nil {
 		return nil,fmt.Errorf("Failed to Unmarshal: %w",err)
 	}
-	fmt.Println(t)
 
 	return t,nil;
 }
