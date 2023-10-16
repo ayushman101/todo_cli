@@ -61,7 +61,7 @@ func (t *Todos) Display() {
 //		fmt.Printf("%v\t\t%s\t\t%v\t\t%s\t\t%s\n",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822), task.CompletedAt.Format(time.RFC822))
 	//}
 
-
+	ColorTable:=ColorBlue
 
 	table:=simpletable.New()
 
@@ -85,19 +85,21 @@ func (t *Todos) Display() {
 
 		r:=[]*simpletable.Cell{
 			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d",i)},
-			{Align: simpletable.AlignCenter, Text: fmt.Sprintf("%s%v%s", color, row.Name, ColorDefault)},
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%v%s",color,row.Completed,ColorDefault)},
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%s%s",color,row.CreatedAt.Format(time.RFC822),ColorDefault)},
+			{Align: simpletable.AlignCenter, Text: fmt.Sprintf("%s%v%s", color, row.Name, ColorTable)},
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%v%s",color,row.Completed,ColorTable)},
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%s%s",color,row.CreatedAt.Format(time.RFC822),ColorTable)},
 
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%s%s",color,row.CompletedAt.Format(time.RFC822),ColorDefault)},
+			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%s%s",color,row.CompletedAt.Format(time.RFC822),ColorTable)},
 
 		}
 
 		table.Body.Cells= append(table.Body.Cells, r)
 	}
-
 	table.SetStyle(simpletable.StyleRounded)
+	fmt.Printf("%s",ColorTable)
 	fmt.Println(table.String())
+
+	fmt.Printf("%s",ColorDefault)
 }
 
 
