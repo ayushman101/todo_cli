@@ -73,6 +73,20 @@ func main(){
 
 			
 			fmt.Println("Task ",*completeIndex, " marked complete")
+		case *delInd!=0:
+			err= tl.DeleteTask(*delInd)
+			if err!=nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+
+			err=tl.SaveToFile("file.json")
+			if err!=nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+			
+			fmt.Println("Task ",*delInd, " deleted ")
 
 		default : 
 			tl.Display()
