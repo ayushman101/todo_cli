@@ -57,6 +57,23 @@ func main(){
 			}
 
 			fmt.Println(addVal," task added ")
+
+		case *completeIndex!=0 :
+			err= tl.ToggleComplete(*completeIndex)
+			if err!=nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+
+			err=tl.SaveToFile("file.json")
+			if err!=nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+
+			
+			fmt.Println("Task ",*completeIndex, " marked complete")
+
 		default : 
 			tl.Display()
 	}
