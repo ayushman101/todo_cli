@@ -17,10 +17,11 @@ const (
 	ColorGreen = "\x1b[32m"
 	ColorBlue  = "\x1b[94m"
 	ColorGray  = "\x1b[90m"
+	ColorYellow= "\x1b[33m"
 )
 
 
-
+var ColorTable string=ColorBlue
 
 type Task struct{
 	Name string
@@ -61,18 +62,16 @@ func (t *Todos) Display() {
 //		fmt.Printf("%v\t\t%s\t\t%v\t\t%s\t\t%s\n",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822), task.CompletedAt.Format(time.RFC822))
 	//}
 
-	ColorTable:=ColorBlue
-
 	table:=simpletable.New()
 
 	table.Header = &simpletable.Header{
 
 		Cells: []*simpletable.Cell{
-			{Align: simpletable.AlignCenter, Text: "#"},
-			{Align: simpletable.AlignCenter, Text: "Task"},
-			{Align: simpletable.AlignCenter, Text: "Completed"},
-			{Align: simpletable.AlignCenter, Text: "CreatedAt"},
-			{Align: simpletable.AlignCenter, Text: "CompletedAt"},
+			{Align: simpletable.AlignCenter, Text: yellow("#")},
+			{Align: simpletable.AlignCenter, Text: yellow("Task")},
+			{Align: simpletable.AlignCenter, Text: yellow("Completed")},
+			{Align: simpletable.AlignCenter, Text: yellow("CreatedAt")},
+			{Align: simpletable.AlignCenter, Text: yellow("CompletedAt")},
 		},
 	}
 
@@ -101,6 +100,12 @@ func (t *Todos) Display() {
 
 	fmt.Printf("%s",ColorDefault)
 }
+
+
+func yellow(text string) string {
+	return fmt.Sprintf("%s%s%s",ColorYellow,text,ColorTable)
+}
+
 
 
 func (t *Todos) DeleteTask(index int) error {
