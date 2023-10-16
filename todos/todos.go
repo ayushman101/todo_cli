@@ -83,7 +83,7 @@ func (t *Todos) Display() {
 		}
 
 		r:=[]*simpletable.Cell{
-			{Align: simpletable.AlignRight, Text: yellow(i)},
+			{Align: simpletable.AlignRight, Text: yellow(i+1)},
 			{Align: simpletable.AlignCenter, Text: anyColor(row.Name,color)},
 			{Align: simpletable.AlignRight, Text: anyColor(row.Completed,color)},
 			{Align: simpletable.AlignRight, Text: anyColor(row.CreatedAt.Format(time.RFC822),color)},
@@ -119,7 +119,7 @@ func (t *Todos) DeleteTask(index int) error {
 
 	tl:=*t
 
-	tl=append(tl[:index],tl[index+1:]...)
+	tl=append(tl[:index-1],tl[index:]...)
 
 	*t=tl
 
