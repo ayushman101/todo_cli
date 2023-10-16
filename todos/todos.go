@@ -83,12 +83,12 @@ func (t *Todos) Display() {
 		}
 
 		r:=[]*simpletable.Cell{
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%d",i)},
-			{Align: simpletable.AlignCenter, Text: fmt.Sprintf("%s%v%s", color, row.Name, ColorTable)},
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%v%s",color,row.Completed,ColorTable)},
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%s%s",color,row.CreatedAt.Format(time.RFC822),ColorTable)},
+			{Align: simpletable.AlignRight, Text: yellow(i)},
+			{Align: simpletable.AlignCenter, Text: anyColor(row.Name,color)},
+			{Align: simpletable.AlignRight, Text: anyColor(row.Completed,color)},
+			{Align: simpletable.AlignRight, Text: anyColor(row.CreatedAt.Format(time.RFC822),color)},
 
-			{Align: simpletable.AlignRight, Text: fmt.Sprintf("%s%s%s",color,row.CompletedAt.Format(time.RFC822),ColorTable)},
+			{Align: simpletable.AlignRight, Text: anyColor(row.CompletedAt.Format(time.RFC822),color)},
 
 		}
 
@@ -102,11 +102,13 @@ func (t *Todos) Display() {
 }
 
 
-func yellow(text string) string {
-	return fmt.Sprintf("%s%s%s",ColorYellow,text,ColorTable)
+func yellow(text any) string {
+	return fmt.Sprintf("%s%v%s",ColorYellow,text,ColorTable)
 }
 
-
+func anyColor (text any, color string) string {
+	return fmt.Sprintf("%s%v%s",color,text,ColorTable)
+}
 
 func (t *Todos) DeleteTask(index int) error {
 
