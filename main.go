@@ -25,8 +25,6 @@ func main(){
 
 	flag.Parse();
 
-	fmt.Printf("%d\n%d\n",*delInd,*completeIndex)
-
 	tl,err:=todos.ReadFromFile("file.json")
 
 	if err!=nil{
