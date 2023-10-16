@@ -175,18 +175,21 @@ func (t *Todos) SaveToFile(filename string) error {
 
 func ReadFromFile(filename string) (*Todos, error) {
 
+	var t *Todos
+
 	data,err:= os.ReadFile(filename)
 
 	if err!=nil {
-		return nil,errors.New("File failed to open")
+		t= &Todos{}
+		return t,errors.New("No task to show")
 	}
 
-	var t *Todos
 
 	err= json.Unmarshal(data,&t)
 	
 	if err!=nil {
-		return nil,fmt.Errorf("Failed to Unmarshal: %w",err)
+		t=&Todos{}
+		return t,fmt.Errorf("Failed to Unmarshal: %w",err)
 	}
 
 	return t,nil;

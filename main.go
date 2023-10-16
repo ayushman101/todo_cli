@@ -28,8 +28,14 @@ func main(){
 	tl,err:=todos.ReadFromFile("file.json")
 
 	if err!=nil{
-		fmt.Println(err)
-		os.Exit(1)
+		
+
+		_,err=os.Create("file.json")
+
+		if err!=nil {
+			fmt.Println("Could not create file")
+			os.Exit(1)
+		}
 	}
 
 
@@ -42,7 +48,7 @@ func main(){
 		case addVal!="" :
 			t,err:=todos.NewTask(addVal)
 			if err!=nil {
-				fmt.Println(err)
+				fmt.Println("1",err)
 				os.Exit(1)
 			}
 
@@ -50,7 +56,7 @@ func main(){
 			err=tl.SaveToFile("file.json")
 			
 			if err!=nil {
-				fmt.Println(err)
+				fmt.Println("2",err)
 				os.Exit(1)
 			}
 
