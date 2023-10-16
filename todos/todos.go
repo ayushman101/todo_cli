@@ -43,9 +43,9 @@ func (t *Todos) AddTask(task Task) {
 
 func (t *Todos) Display() {
 
-	fmt.Println("S.No.\t\tName\t\tCompleted\t\tCreatedAt")
+	fmt.Println("S.No.\t\tName\t\t\tCompleted\t\tCreatedAt\t\tCompletedAt")
 	for i,task:= range *t {
-		fmt.Printf("%v\t\t%s\t\t%v\t\t%s\n",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822))
+		fmt.Printf("%v\t\t%s\t\t%v\t\t%s\t\t%s\n",i+1,task.Name,task.Completed,task.CreatedAt.Format(time.RFC822), task.CompletedAt.Format(time.RFC822))
 	}
 
 }
