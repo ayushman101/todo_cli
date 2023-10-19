@@ -1,1 +1,1 @@
-[{"Name":"task1","Completed":false,"CreatedAt":"2023-10-16T17:18:03.140077217+05:30","CompletedAt":"0001-01-01T00:00:00Z"}]
+[{"Name":"task1","Completed":true,"CreatedAt":"2023-10-16T17:18:03.140077217+05:30","CompletedAt":"2023-10-16T17:21:34.404914819+05:30"},{"Name":"Write Article on ANSI Escape Sequence for coloring text","Completed":false,"CreatedAt":"2023-10-16T17:51:21.080643678+05:30","CompletedAt":"0001-01-01T00:00:00Z"}]

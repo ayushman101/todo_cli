@@ -21,7 +21,7 @@ func main(){
 	
 	completeIndex= flag.Int("completed",0 ,"Give the index of the task to be marked completed")
 
-	list= flag.Bool("ls",false,"Use this flag for Looking at all the tasks")
+	list=flag.Bool("ls",false,"Use this flag for Looking at all the tasks")
 
 	flag.Parse();
 
@@ -43,6 +43,7 @@ func main(){
 	switch{
 		
 		case *list:
+			//todos.TableColor(todos.ColorRed)
 			tl.Display()
 
 		case addVal!="" :
@@ -92,7 +93,9 @@ func main(){
 			
 			fmt.Println("Task ",*delInd, " deleted ")
 
-		default : 
+		default :
+			//fmt.Println("Default")
+			//todos.TableColor(todos.ColorGreen)
 			tl.Display()
 	}
 }

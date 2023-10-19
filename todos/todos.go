@@ -47,6 +47,14 @@ func NewTask (name string) (Task,error) {
 type Todos []Task
 
 
+
+func TableColor(color string) {
+
+	ColorTable=color
+}
+
+
+
 func (t *Todos) AddTask(task Task) {
 
 	tl:=*t
