@@ -14,6 +14,7 @@ func main(){
 	var delInd , completeIndex *int
 	var addVal string
 	var list *bool
+	var t_color *string
 
 	flag.StringVar(&addVal,"add","", "Use this flag followed by name of the task under quotation marks")
 	
@@ -23,6 +24,13 @@ func main(){
 
 	list=flag.Bool("ls",false,"Use this flag for Looking at all the tasks")
 
+	t_color =flag.String("tc","blue",`Use this flag to change table color. Mention name of the table which could be any of the following:
+	-tc blue
+	-tc red
+	-tc gray
+	-tc yellow
+	-tc green
+	-tc white`)
 	flag.Parse();
 
 	tl,err:=todos.ReadFromFile("file.json")
@@ -41,7 +49,6 @@ func main(){
 
 
 	switch{
-		
 		case *list:
 			//todos.TableColor(todos.ColorRed)
 			tl.Display()
@@ -92,9 +99,21 @@ func main(){
 			}
 			
 			fmt.Println("Task ",*delInd, " deleted ")
+		
+		case *t_color!="":
+			colormap:=map[string]string{
+				"white":todos.ColorDefault,
+				"red":todos.ColorRed,
+				"blue":todos.ColorBlue,
+				"gray":todos.ColorGray,
+				"green":todos.ColorGreen,
+				"yellow":todos.ColorYellow,
+			}
 
+			todos.TableColor(colormap[*t_color])
 		default :
-			//fmt.Println("Default")
+			
+			fmt.Println("Default")
 			//todos.TableColor(todos.ColorGreen)
 			tl.Display()
 	}
